@@ -20,7 +20,6 @@ exports.index = function(req, res) {
         };
 
     models.Quiz.findAll({where:["upper(pregunta) like upper(?)", v_busqueda],order:'pregunta ASC'}).then(function(quizes) {
-	quizes = quizes.sort();
 	res.render('quizes/index.ejs',{quizes: quizes, errors: []});
     }).catch(function(error){next(error);})
 
@@ -94,5 +93,12 @@ exports.update = function(req, res) {
       }     // Redirección HTTP a lista de preguntas (URL relativo)
     }
   );
+};
+
+// DELETE /quizes/:id
+exports.destroy = function(req, res) {
+  req.quiz.destroy().then( function() {
+    res.redirect('/quizes');
+  }).catch(function(error){next(error)});
 };
 
