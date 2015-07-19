@@ -14,12 +14,18 @@ exports.load = function(req, res, next, quizId) {
 
 // GET /quizes
 exports.index = function(req, res) {
-  models.Quiz.findAll().then(
-    function(quizes) {
-      res.render('quizes/index', { quizes: quizes});
-    }
-  ).catch(function(error) { next(error);})
+    var v_busqueda = '%';
+    if (req.query.search){
+	    v_busqueda = '%' + req.query.search.replace(/\s/g,"%")  + '%';
+        };
+
+    models.Quiz.findAll({where:["upper(pregunta) like upper(?)", v_busqueda],order:'pregunta ASC'}).then(function(quizes) {
+	quizes = quizes.sort();
+	res.render('quizes/index.ejs',{quizes: quizes});
+    }).catch(function(error){next(error);})
+
 };
+
 
 // GET /quizes/:id
 exports.show = function(req, res) {
