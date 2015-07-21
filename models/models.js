@@ -38,11 +38,24 @@ sequelize.sync().then(function() {
   Quiz.count().then(function (count){
     if(count === 0) {   // la tabla se inicializa solo si está vacía
       Quiz.bulkCreate( 
-        [ {pregunta: 'Capital de Zhejiang',   respuesta: 'Hangzhou'},
-          {pregunta: 'Capital de Burkina Faso', respuesta: 'Ouagadougou'},
-          {pregunta: 'Capital de Zimbabwe', respuesta: 'Harare'},
-          {pregunta: 'Capital de Chechenia', respuesta: 'Grozni'},
-          {pregunta: 'Capital de Macedonia', respuesta: 'Skopje'}
+        [ {pregunta: 'Capital de Zhejiang', respuesta: 'Hangzhou',
+			tema:'humanidades'},
+          {pregunta: 'Capital de Burkina Faso', respuesta: 'Ouagadougou',
+			tema:'humanidades'},
+          {pregunta: 'Capital de Zimbabwe', respuesta: 'Harare',
+			tema:'humanidades'},
+          {pregunta: 'Capital de Chechenia', respuesta: 'Grozni',
+			tema:'humanidades'},
+          {pregunta: 'Capital de Macedonia', respuesta: 'Skopje',
+			tema:'humanidades'},
+          {pregunta: 'Campeón liga fútbol 2015', respuesta: 'Barça',
+			tema:'ocio'},
+          {pregunta: 'Símbolo químico del Tungsteno', respuesta: 'W',
+			tema:'ciencia'},
+          {pregunta: 'Nombre en clave de Windows 10', respuesta: 'Threshold',
+			tema:'tecnologia'},
+          {pregunta: 'Tutor del curso', respuesta: 'Juan Quemada',
+			tema:'otro'}
         ]
       ).then(function(){console.log('Base de datos inicializada')});
     };
