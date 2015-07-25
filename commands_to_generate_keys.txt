@@ -1,0 +1,5 @@
+mkdir certs
+cd certs
+openssl genrsa -out quiz-jmsf-key.pem 2048
+openssl req -new -sha256 -key quiz-jmsf-key.pem -out quiz-jmsf-csr.pem
+openssl x509 -req -in quiz-jmsf-csr.pem -signkey quiz-jmsf-key.pem -out quiz-jmsf-cert.pem
